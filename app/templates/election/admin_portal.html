@@ -1,0 +1,69 @@
+{% extends 'layouts/base.html' %}
+
+
+{%block heading%}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('home')}}"><img class="card-img-top"
+                                                                 src="static/assets/images/\Blockchain.png"
+                                                                 alt="Card image cap" style="max-width: 7rem;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="{{url_for('authentication.logout')}}">Log out</a>
+                <!--                <a class="nav-link" href="{{ url_for('register') }}">Register</a>-->
+            </div>
+        </div>
+    </div>
+</nav>
+<form method="POST">
+
+    <div class="container" style="padding-top: 10%;padding-left: 7%;">
+        <div class="row">
+            <div class="col-4 ">
+                <div class="card text-dark border-success bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header" style="text-align: center;"><b> START </b></div>
+                    <div class="card-body">
+                        <p class="card-text"> Start The Election </p>
+                        <input type="submit" name="adBtn" value="START" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 ">
+                <div class="card text-dark border-success bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header" style="text-align: center;"><b> RESULT </b></div>
+                    <div class="card-body">
+                        <p class="card-text"> Result of The Election </p>
+                        <input type="submit" name="adBtn" value="RESULT" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 ">
+                <div class="card text-dark border-success bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header" style="text-align: center;"><b> END </b></div>
+                    <div class="card-body">
+                        <p class="card-text"> END The Election </p>
+                        <input type="submit" name="adBtn" value="END" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<body>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="{{ category }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{%endblock%}
+</body>

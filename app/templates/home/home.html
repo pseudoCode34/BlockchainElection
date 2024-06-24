@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+
+{% block heading %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('election.home')}}"><img class="card-img-top"
+                                                                          src="static/assets/images/Blockchain.png"
+                                                                          alt="Card image cap" style="max-width: 7rem;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="{{url_for('vote.vote')}}">Vote</a>
+                <a class="nav-link" href="{{ url_for('authentication.register') }}">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container" style="padding-top:1%;">
+    <div class="row">
+        <div class="col-8 offset-2">
+
+            <div class="card bg-light mb-3" style="max-width: 50rem;">
+                <div class="card-header" style="text-align: center;"><h3><b> DApp Voting System </b></h3></div>
+                <div class="card-body">
+                    <div class="card border-dark mb-3">
+                        <img class="card-img-top" src="static/assets/images/blockchanihelpovrban-3824319169.jpg"
+                             alt="Card image cap"
+                             style="padding:0.5%;">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
