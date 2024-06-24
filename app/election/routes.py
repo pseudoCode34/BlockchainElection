@@ -1,3 +1,4 @@
+import requests
 from flask import render_template, url_for, redirect, request
 from flask_login import current_user
 
@@ -14,7 +15,7 @@ def home():
 def admin_portal():
     if request.method == "GET":
         print("[ SOMETHING HAPPENING ]")
-        return render_template("authentication/admin_portal.html")
+        return render_template("election/admin_portal.html")
 
     match request.form["adBtn"]:
         case "RESULT":
@@ -55,11 +56,13 @@ def admin_portal():
             except ValueError as e:
                 print(f"Except: {e}")
                 return "<h1> Already ended</h1>"
-            finally:
+            except requests.exceptions.ConnectionError as e:
+                print(e)
                 return "<h1>Oops</h1>"
 
         case "START":
             def start():
+
                 transaction = contract.functions.start().build_transaction(
                     {"nonce": web3.eth.get_transaction_count(current_user.address), "from": current_user.address,
                      "gas": 3_000_000,
@@ -79,5 +82,6 @@ def admin_portal():
             except ValueError as e:
                 print(e)
                 return "<h1> Already started</h1>"
-            finally:
-                return "<h1> OOps </h1>"
+            except requests.exceptions.ConnectionError as e:
+                print(e)
+                return "<h1>Oops</h1>"

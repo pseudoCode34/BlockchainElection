@@ -16,10 +16,10 @@ web3 = Web3(Web3.HTTPProvider(blockchain_address))
 with open(os.getenv("COMPILED_CONTRACT_FILE"), "r") as file:
     contract_json = json.load(file)
     abi = contract_json["abi"]  # fetch contract's abi
-    bytecode = contract_json["bytecode"]
+    address = contract_json["networks"]["5777"]["address"]
 
 # Fetch deployed contract reference
-contract = web3.eth.contract(bytecode=bytecode, abi=abi)
+contract = web3.eth.contract(address=address, abi=abi)
 
 db = SQLAlchemy()
 login_manager = LoginManager()

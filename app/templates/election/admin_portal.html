@@ -4,7 +4,7 @@
 {%block heading%}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('home')}}"><img class="card-img-top"
+        <a class="navbar-brand" href="{{ url_for('election.home')}}"><img class="card-img-top"
                                                                  src="static/assets/images/\Blockchain.png"
                                                                  alt="Card image cap" style="max-width: 7rem;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -14,7 +14,6 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="{{url_for('authentication.logout')}}">Log out</a>
-                <!--                <a class="nav-link" href="{{ url_for('register') }}">Register</a>-->
             </div>
         </div>
     </div>
