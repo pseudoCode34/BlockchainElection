@@ -1,114 +1,127 @@
 {% extends 'layouts/base.html' %}
-
-{% block heading %}
-
-
-<div class="container ">
+{%block heading%}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('election.home')}}"><img class="card-img-top"
+                                                                          src="static/assets/images/\Blockchain.png"
+                                                                          alt="Card image cap" style="max-width: 7rem;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="{{url_for('authentication.logout')}}">Log out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
     <div class="row">
-        <div class="">
-            <div class="card text-white bg-dark mb-3 w-100 ">
-                <div class="card-header " style="text-align: center;padding: 0.5%;"><b><h4> VOTE </h4></b></div>
-                <div class="card-body">
+        <div class="card text-white bg-dark mb-3 w-100 ">
+            <div class="card-header " style="text-align: center;padding: 0.5%;"><b><h4> VOTE </h4></b></div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if aang > korra and aang > roku %}
+                            <div class="card text-dark bg-success  mb-3"
+                                 style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
 
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-md-4">
-                                {% if aang > korra and aang > roku %}
-                                <div class="card text-dark bg-success  mb-3"
+                                {% elif aang == korra or aang == roku %}
+                                <div class="card text-dark bg-warning  mb-3"
                                      style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
 
-                                    {% elif aang == korra or aang == roku %}
-                                    <div class="card text-dark bg-warning  mb-3"
+                                    {% else %}
+                                    <div class="card text-dark bg-light mb-3"
+                                         style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
+                                        {% endif %}
+                                        <div class="card-header" style="text-align: center;"><b> AANG </b></div>
+                                        <div class="card-body">
+                                            <img alt="Card image cap" class="card-img-top"
+                                                 src="static/assets/images/\1.jpg">
+
+                                            <p class="card-text" style="text-align: center;padding-top: 10%;">
+                                                <b><h3> Total Vote : {{aang}}</h3></b>
+
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+
+
+                                    {% if korra > aang and korra > roku %}
+                                    <div class="card text-dark bg-success  mb-3"
                                          style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
 
-                                        {% else %}
-                                        <div class="card text-dark bg-light mb-3"
+                                        {% elif aang == korra or korra == roku %}
+                                        <div class="card text-dark bg-warning  mb-3"
                                              style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
-                                            {% endif %}
-                                            <div class="card-header" style="text-align: center;"><b> AANG </b></div>
-                                            <div class="card-body">
-                                                <img alt="Card image cap" class="card-img-top"
-                                                     src="static/assets/images/\1.jpg">
 
-                                                <p class="card-text" style="text-align: center;padding-top: 10%;">
-                                                    <b><h3> Total Vote : {{aang}}</h3></b>
-
-                                                </p>
-
+                                            {% else %}
+                                            <div class="card text-dark bg-light mb-3"
+                                                 style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
+                                                {% endif %}
+                                                <div class="card-header" style="text-align: center;"><b> KORRA </b>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img alt="Card image cap" class="card-img-top"
+                                                         src="static/assets/images/\2.jpg">
+                                                    <p class="card-text"
+                                                       style="text-align: center;padding-top: 10%;">
+                                                        <b><h3> Total Vote : {{korra}}</h3></b>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-4">
+                                        <div class="col-md-4">
 
-
-                                        {% if korra > aang and korra > roku %}
-                                        <div class="card text-dark bg-success  mb-3"
-                                             style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
-
-                                            {% elif aang == korra or korra == roku %}
-                                            <div class="card text-dark bg-warning  mb-3"
+                                            {% if roku > korra and roku > aang %}
+                                            <div class="card text-dark bg-success  mb-3"
                                                  style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
 
-                                                {% else %}
-                                                <div class="card text-dark bg-light mb-3"
-                                                     style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
-                                                    {% endif %}
-                                                    <div class="card-header" style="text-align: center;"><b> KORRA </b>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <img alt="Card image cap" class="card-img-top"
-                                                             src="static/assets/images/\2.jpg">
-                                                        <p class="card-text"
-                                                           style="text-align: center;padding-top: 10%;">
-                                                            <b><h3> Total Vote : {{korra}}</h3></b>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-
-                                                {% if roku > korra and roku > aang %}
-                                                <div class="card text-dark bg-success  mb-3"
+                                                {% elif roku == korra or aang == roku %}
+                                                <div class="card text-dark bg-warning  mb-3"
                                                      style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
 
-                                                    {% elif roku == korra or aang == roku %}
-                                                    <div class="card text-dark bg-warning  mb-3"
+                                                    {% else %}
+                                                    <div class="card text-dark bg-light mb-3"
                                                          style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
+                                                        {% endif %}
 
-                                                        {% else %}
-                                                        <div class="card text-dark bg-light mb-3"
-                                                             style="margin-left:1%; margin-right: 1%; max-width: 24rem;">
-                                                            {% endif %}
+                                                        <div class="card-header" style="text-align: center;"><b>
+                                                            ROKU </b></div>
+                                                        <div class="card-body">
+                                                            <img alt="Card image cap"
+                                                                 class="card-img-top"
+                                                                 src="static/assets/images/\3.jpg">
+                                                            <p class="card-text"
+                                                               style="text-align: center;padding-top: 10%;">
+                                                                <b><h3> Total Vote : {{roku}}</h3></b>
 
-                                                            <div class="card-header" style="text-align: center;"><b>
-                                                                ROKU </b></div>
-                                                            <div class="card-body">
-                                                                <img alt="Card image cap"
-                                                                     class="card-img-top"
-                                                                     src="static/assets/images/\3.jpg">
-                                                                <p class="card-text"
-                                                                   style="text-align: center;padding-top: 10%;">
-                                                                    <b><h3> Total Vote : {{roku}}</h3></b>
+                                                            </p>
 
-                                                                </p>
-
-                                                            </div>
                                                         </div>
-
-
                                                     </div>
+
+
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                        {% endblock %}
+{%endblock%}

@@ -5,8 +5,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url_for('election.home')}}"><img class="card-img-top"
-                                                                 src="static/assets/images/\Blockchain.png"
-                                                                 alt="Card image cap" style="max-width: 7rem;"></a>
+                                                                          src="static/assets/images/\Blockchain.png"
+                                                                          alt="Card image cap" style="max-width: 7rem;"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,15 +33,6 @@
             </div>
             <div class="col-4 ">
                 <div class="card text-dark border-success bg-light mb-3" style="max-width: 18rem;">
-                    <div class="card-header" style="text-align: center;"><b> RESULT </b></div>
-                    <div class="card-body">
-                        <p class="card-text"> Result of The Election </p>
-                        <input type="submit" name="adBtn" value="RESULT" class="btn btn-primary"></input>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 ">
-                <div class="card text-dark border-success bg-light mb-3" style="max-width: 18rem;">
                     <div class="card-header" style="text-align: center;"><b> END </b></div>
                     <div class="card-body">
                         <p class="card-text"> END The Election </p>
@@ -54,15 +45,4 @@
 
 </form>
 
-<body>
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for category, message in messages %}
-<div class="{{ category }}">{{ message }}</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
 {%endblock%}
-</body>

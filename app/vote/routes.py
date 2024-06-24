@@ -32,7 +32,7 @@ def vote():
     except ValueError:
         return "<h1>Already voted", "error</h1>"
 
-    return redirect(url_for("vote/voted"))
+    return redirect(url_for("vote.voted"))
 
 
 @blueprint.route("/voted", methods=["GET", "POST"])

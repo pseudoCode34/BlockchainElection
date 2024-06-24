@@ -44,8 +44,9 @@ contract Election {
 
         on_going = false;
     }
+
     // Getter function to get a candidate by ID
-    function get_candidate(uint _id) public only_admin view returns (uint, string memory, uint) {
+    function get_candidate(uint _id) public view returns (uint, string memory, uint) {
         Candidate memory candidate = candidates[_id];
         return (candidate.id, candidate.name, candidate.voteCount);
     }

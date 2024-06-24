@@ -18,7 +18,8 @@ def login():
 
     user = User.query.filter_by(username=form.username.data).first()
     if user is None:
-        return redirect(url_for("election.home"))
+        flash("No user found", "error")
+        return redirect(url_for("authentication.login"))
 
     if not bcrypt.check_password_hash(user.password, form.password.data):
         flash("Incorrect password")
@@ -59,20 +60,23 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@blueprint.route("/admin/", methods=["GET", "POST"])
-# @login_required
-def admin():
+@blueprint.route("/adminLogin", methods=["GET", "POST"])
+def adminLogin():
     form = LoginForm()
     if not form.validate_on_submit():
         return render_template("authentication/adminLogin.html", form=form)
 
     user = User.query.filter_by(username=form.username.data).first()
+    if user is None:
+        flash("No user found", "error")
+        return redirect(url_for("authentication.login"))
+
     if user.username != os.getenv("ADMIN_USERNAME"):
         abort(403)
 
     if not bcrypt.check_password_hash(user.password, os.getenv("ADMIN_PASSWORD")):
         flash("Incorrect password")
-        return redirect(url_for("authentication.login"))
+        return redirect(url_for("authentication.adminLogin"))
 
     login_user(user)
     return redirect(url_for("election.admin_portal"))

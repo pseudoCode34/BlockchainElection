@@ -1,6 +1,6 @@
 import requests
-from flask import render_template, url_for, redirect, request
-from flask_login import current_user
+from flask import render_template, request
+from flask_login import current_user, login_required
 
 from app import contract, web3
 from app.election import blueprint
@@ -11,26 +11,30 @@ def home():
     return render_template("home/home.html")
 
 
+@blueprint.route("/result", methods=["GET"])
+def result():
+    print("[ RESULT ]")
+
+    vote_per_candidate = [
+        contract.caller().candidates(i)[2] for i in range(0, 3)
+    ]
+
+    return render_template(
+        "election/result.html",
+        aang=vote_per_candidate[0],
+        korra=vote_per_candidate[1],
+        roku=vote_per_candidate[2],
+    )
+
+
 @blueprint.route("/adminPortal", methods=["GET", "POST"])
+@login_required
 def admin_portal():
     if request.method == "GET":
         print("[ SOMETHING HAPPENING ]")
         return render_template("election/admin_portal.html")
 
     match request.form["adBtn"]:
-        case "RESULT":
-            print("[ RESULT ]")
-
-            vote_per_candidate = [
-                contract.caller().candidates(i)[2] for i in range(0, 4)
-            ]
-
-            return render_template(
-                "election/result.html",
-                aang=vote_per_candidate[0],
-                korra=vote_per_candidate[1],
-                roku=vote_per_candidate[2],
-            )
 
         case "END":
             print("[ END ]")
@@ -49,7 +53,6 @@ def admin_portal():
                 })
                 tx_receipt = web3.eth.wait_for_transaction_receipt(transaction)
                 print(f"Transaction successful with hash: {tx_receipt}")
-                return "<h1> ELECTION_END </h1>"
 
             try:
                 end()
@@ -59,6 +62,8 @@ def admin_portal():
             except requests.exceptions.ConnectionError as e:
                 print(e)
                 return "<h1>Oops</h1>"
+
+            return "<h1> ELECTION ENDED </h1>"
 
         case "START":
             def start():
@@ -73,7 +78,6 @@ def admin_portal():
                 tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
 
                 print(f"Transaction successful with hash: {tx_receipt}")
-                return redirect(url_for('election.admin_portal'))
 
             print("[ START ]")
 
@@ -85,3 +89,5 @@ def admin_portal():
             except requests.exceptions.ConnectionError as e:
                 print(e)
                 return "<h1>Oops</h1>"
+
+            return "<h1> ELECTION STARTED </h1>"
