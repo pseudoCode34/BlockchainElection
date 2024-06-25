@@ -1,3 +1,3 @@
 from flask import Blueprint
 
-blueprint = Blueprint('vote', __name__)
+blueprint = Blueprint("vote", __name__)

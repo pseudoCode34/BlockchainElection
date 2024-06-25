@@ -74,7 +74,9 @@ def adminLogin():
     if user.username != os.getenv("ADMIN_USERNAME"):
         abort(403)
 
-    if not bcrypt.check_password_hash(user.password, os.getenv("ADMIN_PASSWORD")):
+    if not bcrypt.check_password_hash(
+        user.password, os.getenv("ADMIN_PASSWORD")
+    ):
         flash("Incorrect password")
         return redirect(url_for("authentication.adminLogin"))
 

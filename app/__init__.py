@@ -2,13 +2,14 @@ import json
 import os
 from importlib import import_module
 
+from dotenv import load_dotenv
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from web3 import Web3
 
-from app.config import FlaskConfig
+load_dotenv()
 
 blockchain_address = os.getenv("BLOCKCHAIN_ADDRESS")
 web3 = Web3(Web3.HTTPProvider(blockchain_address))
@@ -36,12 +37,12 @@ def init_flask_extensions(app):
 
 
 def register_blueprints(app):
-    for module_name in ('authentication', 'election', 'vote'):
-        module = import_module(f'app.{module_name}.routes')
+    for module_name in ("authentication", "election", "vote"):
+        module = import_module(f"app.{module_name}.routes")
         app.register_blueprint(module.blueprint)
 
 
-def create_app(config_class=FlaskConfig):
+def create_app(config_class):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
