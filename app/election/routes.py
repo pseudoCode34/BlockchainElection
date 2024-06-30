@@ -1,6 +1,6 @@
-import requests
 from flask import render_template, request
 from flask_login import current_user, login_required
+from requests.exceptions import ConnectionError
 
 from app import contract, web3
 from app.election import blueprint
@@ -59,7 +59,7 @@ def admin_portal():
             except ValueError as e:
                 print(f"Except: {e}")
                 return "<h1> Already ended</h1>"
-            except requests.exceptions.ConnectionError as e:
+            except ConnectionError as e:
                 print(e)
                 return "<h1>Oops</h1>"
 
@@ -97,7 +97,7 @@ def admin_portal():
             except ValueError as e:
                 print(e)
                 return "<h1> Already started</h1>"
-            except requests.exceptions.ConnectionError as e:
+            except ConnectionError as e:
                 print(e)
                 return "<h1>Oops</h1>"
 

@@ -17,7 +17,9 @@ web3 = Web3(Web3.HTTPProvider(blockchain_address))
 with open(os.getenv("COMPILED_CONTRACT_FILE"), "r") as file:
     contract_json = json.load(file)
     abi = contract_json["abi"]  # fetch contract's abi
-    address = contract_json["networks"]["5777"]["address"]
+    address = web3.to_checksum_address(os.getenv("CONTRACT_ADDRESS")
+    # if compile sol using truffle
+    # address = contract_json["networks"]["5777"]["address"]
 
 # Fetch deployed contract reference
 contract = web3.eth.contract(address=address, abi=abi)

@@ -1,8 +1,8 @@
-from flask import redirect, render_template, request, url_for
-from flask_login import current_user, login_required, logout_user
-from requests.exceptions import ConnectionError
+import requests
+from flask import redirect, render_template, url_for, request
+from flask_login import logout_user, login_required, current_user
 
-from app import contract, web3
+from app import web3, contract
 from app.vote import blueprint
 
 
@@ -26,12 +26,12 @@ def vote():
         )
         tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Transaction successful with hash: {tx_receipt}")
-    except ConnectionError as e:
+    except requests.exceptions.ConnectionError as e:
         print(e)
         return "<h1> Truffle RPC server not established yet"
     except ValueError as e:
         print(e)
-        return "<h1>Already voted", "error</h1>"
+        return "<h1>Already voted error</h1>"
 
     return redirect(url_for("vote.voted"))
 
