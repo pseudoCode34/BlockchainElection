@@ -25,11 +25,11 @@ contract Election {
         add_candidate("Candidate 3");
 
     }
-    modifier only_admin(){
-        require(msg.sender == owner, "Requires admin permission");
+    modifier only_owner(){
+        require(msg.sender == owner, "Only owner can modify states");
         _;
     }
-    function start() public only_admin {
+    function start() public only_owner {
         require(on_going == false, "Already started");
         on_going = true;
     }
@@ -39,7 +39,7 @@ contract Election {
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
 
-    function end() public only_admin {
+    function end() public only_owner {
         require(on_going == true, "Already ended");
 
         on_going = false;
